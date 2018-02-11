@@ -1,0 +1,1521 @@
+[
+  {
+    "name": "empty",
+    "tx": "",
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing chain_id",
+    "expected": [],
+    "expert": true
+  },
+  {
+    "name": "minimal",
+    "tx": {
+      "account_number": "V1",
+      "chain_id": "V2",
+      "fee": {
+        "amount": [
+          {
+            "amount": "b"
+          },
+          {
+            "c": "d"
+          },
+          {
+            "x": "y"
+          }
+        ],
+        "gas": "V3"
+      },
+      "memo": "V4",
+      "msgs": [],
+      "sequence": "V5"
+    },
+    "parsingErr": "No error",
+    "validationErr": "Unexpected field",
+    "expected": [
+      "0 | Chain ID : V2",
+      "1 | Account : V1",
+      "2 | Sequence : V5",
+      "3 | Memo : V4",
+      "4 | fee/amount : Unexpected field",
+      "5 | Gas : V3"
+    ],
+    "expert": true
+  },
+  {
+    "name": "multipleMessages",
+    "tx": {
+      "account_number": "V1",
+      "chain_id": "V2",
+      "fee": {
+        "amount": [
+          {
+            "amount": "b",
+            "denom": "d"
+          }
+        ],
+        "gas": "V3"
+      },
+      "memo": "V4",
+      "msgs": [
+        {
+          "m1": "z1"
+        },
+        {
+          "m2": "z2"
+        },
+        {
+          "m3": "z3"
+        }
+      ],
+      "sequence": "V5"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : V2",
+      "1 | Account : V1",
+      "2 | Sequence : V5",
+      "3 | msgs/m1 : z1",
+      "4 | msgs/m2 : z2",
+      "5 | msgs/m3 : z3",
+      "6 | Memo : V4",
+      "7 | Fee : b d",
+      "8 | Gas : V3"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 atom",
+      "5 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 atom",
+      "7 | Memo : testmemo",
+      "8 | Fee : 5 photon",
+      "9 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransfer",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "1 | Source Coins : 10 atom",
+      "2 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "3 | Dest Coins : 10 atom",
+      "4 | Memo : testmemo",
+      "5 | Fee : 5 photon"
+    ],
+    "expert": false
+  },
+  {
+    "name": "completeTransferNoMemoExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing memo",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 atom",
+      "5 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 atom",
+      "7 | Fee : 5 photon",
+      "8 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferNoMemo",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing memo",
+    "expected": [
+      "0 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "1 | Source Coins : 10 atom",
+      "2 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "3 | Dest Coins : 10 atom",
+      "4 | Fee : 5 photon"
+    ],
+    "expert": false
+  },
+  {
+    "name": "completeTransferEmptyMemoExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 atom",
+      "5 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 atom",
+      "7 | Fee : 5 photon",
+      "8 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "completeTransferEmptyMemo",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "1 | Source Coins : 10 atom",
+      "2 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "3 | Dest Coins : 10 atom",
+      "4 | Fee : 5 photon"
+    ],
+    "expert": false
+  },
+  {
+    "name": "multipleTransfersExpert",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "test-chain-1",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "address": "test2",
+              "coins": [
+                {
+                  "amount": "20",
+                  "denom": "bitcoin"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "test3",
+              "coins": [
+                {
+                  "amount": "50",
+                  "denom": "ripple"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : test-chain-1",
+      "1 | Account : 0",
+      "2 | Sequence : 1",
+      "3 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "4 | Source Coins : 10 atom",
+      "5 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "6 | Dest Coins : 10 atom",
+      "7 | Source Address : test2",
+      "8 | Source Coins : 20 bitcoin",
+      "9 | Dest Address : test3",
+      "10 | Dest Coins : 50 ripple",
+      "11 | Memo : testmemo",
+      "12 | Fee : 5 photon",
+      "13 | Gas : 10000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "multipleTransfers",
+    "tx": {
+      "account_number": "0",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5",
+            "denom": "photon"
+          }
+        ],
+        "gas": "10000"
+      },
+      "memo": "testmemo",
+      "msgs": [
+        {
+          "inputs": [
+            {
+              "address": "axelaraccaddr1d9h8qat5e4ehc5",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "axelaraccaddr1da6hgur4wse3jx32",
+              "coins": [
+                {
+                  "amount": "10",
+                  "denom": "atom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "inputs": [
+            {
+              "address": "test2",
+              "coins": [
+                {
+                  "amount": "20",
+                  "denom": "bitcoin"
+                }
+              ]
+            }
+          ],
+          "outputs": [
+            {
+              "address": "test3",
+              "coins": [
+                {
+                  "amount": "50",
+                  "denom": "ripple"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Source Address : axelaraccaddr1d9h8qat5e4ehc5",
+      "1 | Source Coins : 10 atom",
+      "2 | Dest Address : axelaraccaddr1da6hgur4wse3jx32",
+      "3 | Dest Coins : 10 atom",
+      "4 | Source Address : test2",
+      "5 | Source Coins : 20 bitcoin",
+      "6 | Dest Address : test3",
+      "7 | Dest Coins : 50 ripple",
+      "8 | Memo : testmemo",
+      "9 | Fee : 5 photon"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegationExpert",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 6571",
+      "2 | Sequence : 1",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 uatom",
+      "5 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "5 | Delegator [2/2] : 3vwtpl",
+      "6 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "6 | Validator [2/2] : 9m5s03xfytvz7",
+      "7 | Memo : Zondax.ch",
+      "8 | Fee : 5000 uatom",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "delegationDifferentChain",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "otherhub",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : otherhub",
+      "1 | Account : 6571",
+      "2 | Sequence : 1",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 uatom",
+      "5 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "5 | Delegator [2/2] : 3vwtpl",
+      "6 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "6 | Validator [2/2] : 9m5s03xfytvz7",
+      "7 | Memo : Zondax.ch",
+      "8 | Fee : 5000 uatom",
+      "9 | Gas : 200000"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegation",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Zondax.ch",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "1"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Type : Delegate",
+      "1 | Amount : 1.000000 ATOM",
+      "2 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "2 | Delegator [2/2] : 3vwtpl",
+      "3 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "3 | Validator [2/2] : 9m5s03xfytvz7",
+      "4 | Memo : Zondax.ch",
+      "5 | Fee : 0.005000 ATOM"
+    ],
+    "expert": false
+  },
+  {
+    "name": "proposalExpert",
+    "tx": {
+      "account_number": "2",
+      "chain_id": "local-testnet",
+      "fee": {
+        "amount": [],
+        "gas": "500000"
+      },
+      "memo": "abc",
+      "msgs": [
+        {
+          "description": "test",
+          "initial_deposit": [
+            {
+              "amount": "1",
+              "denom": "stake"
+            }
+          ],
+          "proposal_type": "Text",
+          "proposer": "axelar101234567890abcdefghijklmnopqrstuvwxyz0",
+          "title": "test"
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : local-testnet",
+      "1 | Account : 2",
+      "2 | Sequence : 0",
+      "3 | msgs/description : test",
+      "4 | msgs/initial_deposit/amount : 1",
+      "5 | msgs/initial_deposit/denom : stake",
+      "6 | msgs/proposal_type : Text",
+      "7 | msgs/proposer [1/2] : axelar101234567890abcdefghijklmnopqrstu",
+      "7 | msgs/proposer [2/2] : vwxyz0",
+      "8 | msgs/title : test",
+      "9 | Memo : abc",
+      "10 | Fee : Empty",
+      "11 | Gas : 500000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "proposal",
+    "tx": {
+      "account_number": "2",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [],
+        "gas": "500000"
+      },
+      "memo": "abc",
+      "msgs": [
+        {
+          "description": "test",
+          "initial_deposit": [
+            {
+              "amount": "1",
+              "denom": "stake"
+            }
+          ],
+          "proposal_type": "Text",
+          "proposer": "axelar101234567890abcdefghijklmnopqrstuvwxyz0",
+          "title": "test"
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | msgs/description : test",
+      "1 | msgs/initial_deposit/amount : 1",
+      "2 | msgs/initial_deposit/denom : stake",
+      "3 | msgs/proposal_type : Text",
+      "4 | msgs/proposer [1/2] : axelar101234567890abcdefghijklmnopqrstu",
+      "4 | msgs/proposer [2/2] : vwxyz0",
+      "5 | msgs/title : test",
+      "6 | Memo : abc",
+      "7 | Fee : Empty"
+    ],
+    "expert": false
+  },
+  {
+    "name": "delegation2Expert",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 6571",
+      "2 | Sequence : 0",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 uatom",
+      "5 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "5 | Delegator [2/2] : 3vwtpl",
+      "6 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "6 | Validator [2/2] : 9m5s03xfytvz7",
+      "7 | Memo : Delegated with Ledger from union.market",
+      "8 | Fee : 5000 uatom",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "delegation2",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Type : Delegate",
+      "1 | Amount : 1.000000 ATOM",
+      "2 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "2 | Delegator [2/2] : 3vwtpl",
+      "3 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "3 | Validator [2/2] : 9m5s03xfytvz7",
+      "4 | Memo : Delegated with Ledger from union.market",
+      "5 | Fee : 0.005000 ATOM"
+    ],
+    "expert": false
+  },
+  {
+    "name": "badcase",
+    "tx": {
+      "chain_id": "1234567890AB",
+      "fee": "1234"
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing sequence",
+    "expected": [
+      "0 | Chain ID : 1234567890AB",
+      "1 | fee : 1234"
+    ],
+    "expert": true
+  },
+  {
+    "name": "badcase2",
+    "tx": {
+      "account_number": "6571",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "5000",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "Delegated with Ledger from union.market",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "amount": {
+              "amount": "1000000",
+              "denom": "uatom"
+            },
+            "delegator_address": "axelar102hty0jv2s29lyc4u0tv97z9v298e24t3vwtpl",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        }
+      ],
+      "sequence": "0"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 6571",
+      "2 | Sequence : 0",
+      "3 | Type : Delegate",
+      "4 | Amount : 1000000 uatom",
+      "5 | Delegator [1/2] : axelar102hty0jv2s29lyc4u0tv97z9v298e24t",
+      "5 | Delegator [2/2] : 3vwtpl",
+      "6 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "6 | Validator [2/2] : 9m5s03xfytvz7",
+      "7 | Memo : Delegated with Ledger from union.market",
+      "8 | Fee : 5000 uatom",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "oldStackOverflow",
+    "tx": {
+      "1": [
+        [
+          [
+            [
+              [
+                [
+                  [
+                    [
+                      [
+                        [
+                          [
+                            [
+                              {
+                                "2": "4"
+                              }
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    },
+    "parsingErr": "No error",
+    "validationErr": "JSON Missing chain_id",
+    "expected": [
+    ],
+    "expert": true
+  },
+  {
+    "name": "groupingSmallExpert",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "4 | Delegator [2/2] : hgqhwh",
+      "5 | Validator [1/2] : axelarvaloper1qwl879nx9t6kef4supyazayf7",
+      "5 | Validator [2/2] : vjhennyh568ys",
+      "6 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "6 | Delegator [2/2] : hgqhwh",
+      "7 | Validator [1/2] : axelarvaloper1x88j7vp2xnw3zec8ur3g4waxy",
+      "7 | Validator [2/2] : cyz7m0mahdv3p",
+      "8 | Fee : 600 uatom",
+      "9 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "groupingSmall",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Type : Withdraw Reward",
+      "1 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "1 | Delegator [2/2] : hgqhwh",
+      "2 | Validator [1/2] : axelarvaloper1qwl879nx9t6kef4supyazayf7",
+      "2 | Validator [2/2] : vjhennyh568ys",
+      "3 | Validator [1/2] : axelarvaloper1x88j7vp2xnw3zec8ur3g4waxy",
+      "3 | Validator [2/2] : cyz7m0mahdv3p",
+      "4 | Fee : 0.000600 ATOM"
+    ],
+    "expert": false
+  },
+  {
+    "name": "groupingExpert",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1ttfytaf43nkytzp8hkfjfgjc693ky4t3y2n2ku"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "4 | Delegator [2/2] : hgqhwh",
+      "5 | Validator [1/2] : axelarvaloper1qwl879nx9t6kef4supyazayf7",
+      "5 | Validator [2/2] : vjhennyh568ys",
+      "6 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "6 | Delegator [2/2] : hgqhwh",
+      "7 | Validator [1/2] : axelarvaloper1x88j7vp2xnw3zec8ur3g4waxy",
+      "7 | Validator [2/2] : cyz7m0mahdv3p",
+      "8 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "8 | Delegator [2/2] : hgqhwh",
+      "9 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "9 | Validator [2/2] : 9m5s03xfytvz7",
+      "10 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "10 | Delegator [2/2] : hgqhwh",
+      "11 | Validator [1/2] : axelarvaloper1ttfytaf43nkytzp8hkfjfgjc6",
+      "11 | Validator [2/2] : 93ky4t3y2n2ku",
+      "12 | Fee : 600 uatom",
+      "13 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "grouping_ledger_testcase",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "axelarvaloper1kn3wugetjuy4zetlq6wadchfhvu3x740ae6z6x"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "axelarvaloper1sjllsnramtg3ewxqwwrwjxfgc4n4ef9u2lcnj0"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "axelarvaloper1ey69r37gfxvxg62sh4r0ktpuc46pzjrm873ae8"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl87jycah",
+            "validator_address": "axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl8",
+      "4 | Delegator [2/2] : 7jycah",
+      "5 | Validator [1/2] : axelarvaloper1kn3wugetjuy4zetlq6wadchfh",
+      "5 | Validator [2/2] : vu3x740ae6z6x",
+      "6 | Delegator [1/2] : axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl8",
+      "6 | Delegator [2/2] : 7jycah",
+      "7 | Validator [1/2] : axelarvaloper1sjllsnramtg3ewxqwwrwjxfgc",
+      "7 | Validator [2/2] : 4n4ef9u2lcnj0",
+      "8 | Delegator [1/2] : axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl8",
+      "8 | Delegator [2/2] : 7jycah",
+      "9 | Validator [1/2] : axelarvaloper1ey69r37gfxvxg62sh4r0ktpuc",
+      "9 | Validator [2/2] : 46pzjrm873ae8",
+      "10 | Delegator [1/2] : axelar1kky4yzth6gdrm8ga5zlfwhav33yr7hl8",
+      "10 | Delegator [2/2] : 7jycah",
+      "11 | Validator [1/2] : axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk",
+      "11 | Validator [2/2] : 542junl7rsvq6",
+      "12 | Fee : 600 uatom",
+      "13 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "massive",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1qwl879nx9t6kef4supyazayf7vjhennyh568ys"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1x88j7vp2xnw3zec8ur3g4waxycyz7m0mahdv3p"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1grgelyng2v6v3t8z87wu3sxgt9m5s03xfytvz7"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1ttfytaf43nkytzp8hkfjfgjc693ky4t3y2n2ku"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1wdrypwex63geqswmcy5qynv4w3z3dyef2qmyna"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper102ruvpv2srmunfffxavttxnhezln6fnc54at8c"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper10e4vsut6suau8tk9m6dnrm0slgd6npe3jx5xpv"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1sxx9mszve0gaedz5ld7qdkjkfv8z992ax69k08"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1ssm0d433seakyak8kcf93yefhknjleeds4y3em"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper13sduv92y3xdhy3rpmhakrc3v7t37e7ps9l0kpv"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper15urq2dtp9qce4fyc85m6upwm9xul3049e02707"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper14kn0kk33szpwus9nh8n87fjel8djx0y070ymmj"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper14lultfckehtszvzw4ehu0apvsr77afvyju5zzy"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1k9a0cs97vul8w2vwknlfmpez6prv8klv03lv3d"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1kj0h4kn4z5xvedu2nd9c4a9a559wvpuvu0h6qn"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar14lultfckehtszvzw4ehu0apvsr77afvyhgqhwh",
+            "validator_address": "axelarvaloper1hjct6q7npsspsg3dgvzk3sdf89spmlpfdn6m9d"
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Chain ID : axelarhub-4",
+      "1 | Account : 108",
+      "2 | Sequence : 106",
+      "3 | Type : Withdraw Reward",
+      "4 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "4 | Delegator [2/2] : hgqhwh",
+      "5 | Validator [1/2] : axelarvaloper1qwl879nx9t6kef4supyazayf7",
+      "5 | Validator [2/2] : vjhennyh568ys",
+      "6 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "6 | Delegator [2/2] : hgqhwh",
+      "7 | Validator [1/2] : axelarvaloper1x88j7vp2xnw3zec8ur3g4waxy",
+      "7 | Validator [2/2] : cyz7m0mahdv3p",
+      "8 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "8 | Delegator [2/2] : hgqhwh",
+      "9 | Validator [1/2] : axelarvaloper1grgelyng2v6v3t8z87wu3sxgt",
+      "9 | Validator [2/2] : 9m5s03xfytvz7",
+      "10 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "10 | Delegator [2/2] : hgqhwh",
+      "11 | Validator [1/2] : axelarvaloper1ttfytaf43nkytzp8hkfjfgjc6",
+      "11 | Validator [2/2] : 93ky4t3y2n2ku",
+      "12 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "12 | Delegator [2/2] : hgqhwh",
+      "13 | Validator [1/2] : axelarvaloper1wdrypwex63geqswmcy5qynv4w",
+      "13 | Validator [2/2] : 3z3dyef2qmyna",
+      "14 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "14 | Delegator [2/2] : hgqhwh",
+      "15 | Validator [1/2] : axelarvaloper102ruvpv2srmunfffxavttxnhe",
+      "15 | Validator [2/2] : zln6fnc54at8c",
+      "16 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "16 | Delegator [2/2] : hgqhwh",
+      "17 | Validator [1/2] : axelarvaloper10e4vsut6suau8tk9m6dnrm0sl",
+      "17 | Validator [2/2] : gd6npe3jx5xpv",
+      "18 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "18 | Delegator [2/2] : hgqhwh",
+      "19 | Validator [1/2] : axelarvaloper1sxx9mszve0gaedz5ld7qdkjkf",
+      "19 | Validator [2/2] : v8z992ax69k08",
+      "20 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "20 | Delegator [2/2] : hgqhwh",
+      "21 | Validator [1/2] : axelarvaloper1ssm0d433seakyak8kcf93yefh",
+      "21 | Validator [2/2] : knjleeds4y3em",
+      "22 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "22 | Delegator [2/2] : hgqhwh",
+      "23 | Validator [1/2] : axelarvaloper13sduv92y3xdhy3rpmhakrc3v7",
+      "23 | Validator [2/2] : t37e7ps9l0kpv",
+      "24 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "24 | Delegator [2/2] : hgqhwh",
+      "25 | Validator [1/2] : axelarvaloper15urq2dtp9qce4fyc85m6upwm9",
+      "25 | Validator [2/2] : xul3049e02707",
+      "26 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "26 | Delegator [2/2] : hgqhwh",
+      "27 | Validator [1/2] : axelarvaloper14kn0kk33szpwus9nh8n87fjel",
+      "27 | Validator [2/2] : 8djx0y070ymmj",
+      "28 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "28 | Delegator [2/2] : hgqhwh",
+      "29 | Validator [1/2] : axelarvaloper14lultfckehtszvzw4ehu0apvs",
+      "29 | Validator [2/2] : r77afvyju5zzy",
+      "30 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "30 | Delegator [2/2] : hgqhwh",
+      "31 | Validator [1/2] : axelarvaloper1k9a0cs97vul8w2vwknlfmpez6",
+      "31 | Validator [2/2] : prv8klv03lv3d",
+      "32 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "32 | Delegator [2/2] : hgqhwh",
+      "33 | Validator [1/2] : axelarvaloper1kj0h4kn4z5xvedu2nd9c4a9a5",
+      "33 | Validator [2/2] : 59wvpuvu0h6qn",
+      "34 | Delegator [1/2] : axelar14lultfckehtszvzw4ehu0apvsr77afvy",
+      "34 | Delegator [2/2] : hgqhwh",
+      "35 | Validator [1/2] : axelarvaloper1hjct6q7npsspsg3dgvzk3sdf8",
+      "35 | Validator [2/2] : 9spmlpfdn6m9d",
+      "36 | Fee : 600 uatom",
+      "37 | Gas : 200000"
+    ],
+    "expert": true
+  },
+  {
+    "name": "combined",
+    "tx": {
+      "account_number": "108",
+      "chain_id": "axelarhub-4",
+      "fee": {
+        "amount": [
+          {
+            "amount": "600",
+            "denom": "uatom"
+          }
+        ],
+        "gas": "200000"
+      },
+      "memo": "",
+      "msgs": [
+        {
+          "type": "axelar-sdk/MsgWithdrawDelegationReward",
+          "value": {
+            "delegator_address": "axelar19umvgcvk8cxsvzemy239nj9ngc2ltukantgyp3",
+            "validator_address": "axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6"
+          }
+        },
+        {
+          "type": "axelar-sdk/MsgDelegate",
+          "value": {
+            "delegator_address": "axelar19umvgcvk8cxsvzemy239nj9ngc2ltukantgyp3",
+            "validator_address": "axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk542junl7rsvq6",
+            "amount": {
+              "denom": "uatom",
+              "amount": "20139397"
+            }
+          }
+        }
+      ],
+      "sequence": "106"
+    },
+    "parsingErr": "No error",
+    "validationErr": "No error",
+    "expected": [
+      "0 | Type : Withdraw Reward",
+      "1 | Delegator [1/2] : axelar19umvgcvk8cxsvzemy239nj9ngc2ltuka",
+      "1 | Delegator [2/2] : ntgyp3",
+      "2 | Validator [1/2] : axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk",
+      "2 | Validator [2/2] : 542junl7rsvq6",
+      "3 | Type : Delegate",
+      "4 | Amount : 20.139397 ATOM",
+      "5 | Validator [1/2] : axelarvaloper1648ynlpdw7fqa2axt0w2yp3fk",
+      "5 | Validator [2/2] : 542junl7rsvq6",
+      "6 | Fee : 0.000600 ATOM"
+    ],
+    "expert": false
+  }
+]
