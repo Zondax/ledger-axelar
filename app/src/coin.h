@@ -44,7 +44,6 @@ typedef enum {
 
 #define COIN_DEFAULT_CHAINID                "axelarhub-4"
 
-// In non-expert mode, the app will convert from uatom to ATOM
 #define COIN_DEFAULT_DENOM_BASE             "uaxl"
 #define COIN_DEFAULT_DENOM_REPR             "AXL"
 #define COIN_DEFAULT_DENOM_FACTOR           6
