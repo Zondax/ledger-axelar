@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@zondax/ledger-axelar": "^0.0.1",
-    "@zondax/zemu": "^0.24.1"
+    "@zondax/zemu": "^0.27.4"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",
