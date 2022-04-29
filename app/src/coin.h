@@ -42,7 +42,7 @@ typedef enum {
 #define APPVERSION_LINE1                   "Version:"
 #define APPVERSION_LINE2                   ("v" APPVERSION)
 
-#define COIN_DEFAULT_CHAINID                "axelarhub-4"
+#define COIN_DEFAULT_CHAINID                "axelar-dojo-1"
 
 #define COIN_DEFAULT_DENOM_BASE             "uaxl"
 #define COIN_DEFAULT_DENOM_REPR             "AXL"

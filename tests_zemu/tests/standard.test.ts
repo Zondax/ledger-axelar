@@ -107,8 +107,7 @@ describe('Standard', function () {
       const respRequest = app.showAddressAndPubKey(path, 'axelar')
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
-
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-show_address`, 2)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-show_address`)
 
       const resp = await respRequest
       console.log(resp)
@@ -163,7 +162,7 @@ describe('Standard', function () {
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
       // Now navigate the address / path
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-show_address_huge`, 3)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-show_address_huge`)
 
       const resp = await respRequest
       console.log(resp)
@@ -203,7 +202,7 @@ describe('Standard', function () {
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
       // Now navigate the address / path
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic`, m.prefix == 'S' ? 8 : 6)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic`)
 
       const resp = await signatureRequest
       console.log(resp)
@@ -250,7 +249,7 @@ describe('Standard', function () {
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
 
       // Now navigate the address / path
-      await sim.compareSnapshotsAndAccept('.', `${m.prefix.toLowerCase()}-sign_basic2`, m.prefix == 'S' ? 7 : 6)
+      await sim.compareSnapshotsAndApprove('.', `${m.prefix.toLowerCase()}-sign_basic2`)
 
       const resp = await signatureRequest
       console.log(resp)

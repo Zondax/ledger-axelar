@@ -38,7 +38,7 @@ export const DEVICE_MODELS: DeviceModel[] = [
 
 export const example_tx_str_basic = {
   account_number: '108',
-  chain_id: 'axelarhub-4',
+  chain_id: 'axelar-dojo-1',
   fee: {
     amount: [
       {
@@ -70,7 +70,7 @@ export const example_tx_str_basic = {
 
 export const example_tx_str_expert = {
   account_number: '108',
-  chain_id: 'axelarhub-4',
+  chain_id: 'axelar-dojo-1',
   fee: {
     amount: [
       {
@@ -102,7 +102,7 @@ export const example_tx_str_expert = {
 
 export const example_tx_str_combined = {
   account_number: '108',
-  chain_id: 'axelarhub-4',
+  chain_id: 'axelar-dojo-1',
   fee: {
     amount: [
       {
@@ -138,7 +138,7 @@ export const example_tx_str_combined = {
 
 export const example_tx_str_basic2 = {
   account_number: '482',
-  chain_id: 'axelarhub-4',
+  chain_id: 'axelar-dojo-1',
   fee: {
     amount: [],
     gas: '10000000',

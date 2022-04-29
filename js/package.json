@@ -25,7 +25,7 @@
     "url": "https://github.com/zondax/ledger-axelar/issues"
   },
   "dependencies": {
-    "@ledgerhq/hw-transport": "^6.11.2"
+    "@ledgerhq/hw-transport": "^6.27.1"
   },
   "devDependencies": {
     "@types/ledgerhq__hw-transport": "^4.21.4",
