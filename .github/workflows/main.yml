@@ -192,7 +192,7 @@ jobs:
         run: |
           source $HOME/.cargo/env
           make
-          mv ./app/pkg/installer_s.sh ./app/pkg/installer_nanos_plus.sh
+          mv ./app/pkg/installer_s2.sh ./app/pkg/installer_nanos_plus.sh
 
       - name: Set tag
         id: nanosp
