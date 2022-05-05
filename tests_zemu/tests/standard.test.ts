@@ -78,7 +78,7 @@ describe('Standard', function () {
       const app = new AxelarApp(sim.getTransport())
 
       // Derivation path. First 3 items are automatically hardened!
-      const path = [44, 620, 5, 0, 3]
+      const path = [44, 118, 5, 0, 3]
       const resp = await app.getAddressAndPubKey(path, 'axelar')
 
       console.log(resp)
@@ -89,7 +89,7 @@ describe('Standard', function () {
       expect(resp).toHaveProperty('bech32_address')
       expect(resp).toHaveProperty('compressed_pk')
 
-      expect(resp.bech32_address).toEqual('axelar1s7sa4sk3al36ckqg36emr9n3yh6nfhelu6wa6c')
+      expect(resp.bech32_address).toEqual('axelar1wkd9tfm5pqvhhaxq77wv9tvjcsazuayk27f934')
       expect(resp.compressed_pk.length).toEqual(33)
     } finally {
       await sim.close()
@@ -103,7 +103,7 @@ describe('Standard', function () {
       const app = new AxelarApp(sim.getTransport())
 
       // Derivation path. First 3 items are automatically hardened!
-      const path = [44, 620, 5, 0, 3]
+      const path = [44, 118, 5, 0, 3]
       const respRequest = app.showAddressAndPubKey(path, 'axelar')
       // Wait until we are not in the main menu
       await sim.waitUntilScreenIsNot(sim.getMainMenuSnapshot())
@@ -118,7 +118,7 @@ describe('Standard', function () {
       expect(resp).toHaveProperty('bech32_address')
       expect(resp).toHaveProperty('compressed_pk')
 
-      expect(resp.bech32_address).toEqual('axelar1s7sa4sk3al36ckqg36emr9n3yh6nfhelu6wa6c')
+      expect(resp.bech32_address).toEqual('axelar1wkd9tfm5pqvhhaxq77wv9tvjcsazuayk27f934')
       expect(resp.compressed_pk.length).toEqual(33)
     } finally {
       await sim.close()
@@ -132,7 +132,7 @@ describe('Standard', function () {
       const app = new AxelarApp(sim.getTransport())
 
       // Derivation path. First 3 items are automatically hardened!
-      const path = [44, 620, 2147483647, 0, 4294967295]
+      const path = [44, 118, 2147483647, 0, 4294967295]
       const resp = await app.showAddressAndPubKey(path, 'axelar')
       console.log(resp)
 
@@ -155,7 +155,7 @@ describe('Standard', function () {
       await sim.clickLeft()
 
       // Derivation path. First 3 items are automatically hardened!
-      const path = [44, 620, 2147483647, 0, 4294967295]
+      const path = [44, 118, 2147483647, 0, 4294967295]
       const respRequest = app.showAddressAndPubKey(path, 'axelar')
 
       // Wait until we are not in the main menu
@@ -173,7 +173,7 @@ describe('Standard', function () {
       expect(resp).toHaveProperty('bech32_address')
       expect(resp).toHaveProperty('compressed_pk')
 
-      expect(resp.bech32_address).toEqual('axelar16espale5wqzpsp0rrgl02easta938sfwpzxhfv')
+      expect(resp.bech32_address).toEqual('axelar1ex7gkwwmq4vcgdwcalaq3t20pgwr37u6h9qgfk')
       expect(resp.compressed_pk.length).toEqual(33)
     } finally {
       await sim.close()
@@ -186,7 +186,7 @@ describe('Standard', function () {
       await sim.start({ ...DEFAULT_OPTIONS, model: m.name })
       const app = new AxelarApp(sim.getTransport())
 
-      const path = [44, 620, 0, 0, 0]
+      const path = [44, 118, 0, 0, 0]
       const tx = JSON.stringify(example_tx_str_basic)
 
       // get address / publickey
@@ -233,7 +233,7 @@ describe('Standard', function () {
       await sim.start({ ...DEFAULT_OPTIONS, model: m.name })
       const app = new AxelarApp(sim.getTransport())
 
-      const path = [44, 620, 0, 0, 0]
+      const path = [44, 118, 0, 0, 0]
       const tx = JSON.stringify(example_tx_str_basic2)
 
       // get address / publickey

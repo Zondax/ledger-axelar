@@ -60,7 +60,7 @@ $(info COIN  = [$(COIN)])
 ifeq ($(COIN),AXL)
 # Main app configuration
 APPNAME = "Axelar"
-APPPATH = "44'/620'"
+APPPATH = "44'/118'"
 else
 define error_message
 
