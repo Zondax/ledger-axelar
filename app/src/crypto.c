@@ -128,7 +128,7 @@ zxerr_t crypto_sign(uint8_t *signature,
     END_TRY;
 
     *sigSize = signatureLength;
-    return zxerr_ok;
+    return err;
 }
 
 #else
