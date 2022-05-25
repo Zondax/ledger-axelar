@@ -39,6 +39,7 @@ zxerr_t crypto_extractPublicKey(const uint32_t path[HDPATH_LEN_DEFAULT], uint8_t
         return zxerr_invalid_crypto_settings;
     }
 
+    zxerr_t err = zxerr_ok;
     BEGIN_TRY
     {
         TRY {
@@ -50,10 +51,21 @@ zxerr_t crypto_extractPublicKey(const uint32_t path[HDPATH_LEN_DEFAULT], uint8_t
             cx_ecfp_init_private_key(CX_CURVE_256K1, privateKeyData, 32, &cx_privateKey);
             cx_ecfp_init_public_key(CX_CURVE_256K1, NULL, 0, &cx_publicKey);
             cx_ecfp_generate_pair(CX_CURVE_256K1, &cx_publicKey, &cx_privateKey, 1);
+
+            // Format pubkey
+            for (int i = 0; i < 32; i++) {
+                pubKey[i] = cx_publicKey.W[64 - i];
+            }
+            cx_publicKey.W[0] = cx_publicKey.W[64] & 1 ? 0x03 : 0x02; // "Compress" public key in place
+            if ((cx_publicKey.W[32] & 1) != 0) {
+                pubKey[31] |= 0x80;
+            }
+            //////////////////////
+            MEMCPY(pubKey, cx_publicKey.W, PK_LEN_SECP256K1);
+
         }
-        CATCH_OTHER(e) {
-            CLOSE_TRY;
-            return zxerr_ledger_api_error;
+        CATCH_ALL {
+            err = zxerr_ledger_api_error;
         }
         FINALLY {
             MEMZERO(&cx_privateKey, sizeof(cx_privateKey));
@@ -62,18 +74,7 @@ zxerr_t crypto_extractPublicKey(const uint32_t path[HDPATH_LEN_DEFAULT], uint8_t
     }
     END_TRY;
 
-    // Format pubkey
-    for (int i = 0; i < 32; i++) {
-        pubKey[i] = cx_publicKey.W[64 - i];
-    }
-    cx_publicKey.W[0] = cx_publicKey.W[64] & 1 ? 0x03 : 0x02; // "Compress" public key in place
-    if ((cx_publicKey.W[32] & 1) != 0) {
-        pubKey[31] |= 0x80;
-    }
-    //////////////////////
-    MEMCPY(pubKey, cx_publicKey.W, PK_LEN_SECP256K1);
-
-    return zxerr_ok;
+    return err;
 }
 
 zxerr_t crypto_sign(uint8_t *signature,
@@ -91,6 +92,8 @@ zxerr_t crypto_sign(uint8_t *signature,
     uint8_t privateKeyData[32];
     unsigned int info = 0;
     int signatureLength = 0;
+
+    zxerr_t err = zxerr_ok;
     BEGIN_TRY
     {
         TRY
@@ -113,6 +116,10 @@ zxerr_t crypto_sign(uint8_t *signature,
                                             signatureMaxlen,
                                             &info);
         }
+        CATCH_ALL {
+            signatureLength = 0;
+            err = zxerr_ledger_api_error;
+        }
         FINALLY {
             MEMZERO(&cx_privateKey, sizeof(cx_privateKey));
             MEMZERO(privateKeyData, 32);
@@ -121,7 +128,7 @@ zxerr_t crypto_sign(uint8_t *signature,
     END_TRY;
 
     *sigSize = signatureLength;
-    return zxerr_ok;
+    return err;
 }
 
 #else
@@ -182,7 +189,7 @@ zxerr_t crypto_fillAddress(uint8_t *buffer, uint16_t buffer_len, uint16_t *addrR
     }
 
     // extract pubkey
-    crypto_extractPublicKey(hdPath, buffer, buffer_len);
+    CHECK_ZXERR(crypto_extractPublicKey(hdPath, buffer, buffer_len))
 
     // Hash it
     uint8_t hashed1_pk[CX_SHA256_SIZE];
@@ -192,7 +199,7 @@ zxerr_t crypto_fillAddress(uint8_t *buffer, uint16_t buffer_len, uint16_t *addrR
     ripemd160_32(hashed2_pk, hashed1_pk);
 
     char *addr = (char *) (buffer + PK_LEN_SECP256K1);
-    bech32EncodeFromBytes(addr, buffer_len - PK_LEN_SECP256K1, bech32_hrp, hashed2_pk, CX_RIPEMD160_SIZE, 1);
+    CHECK_ZXERR(bech32EncodeFromBytes(addr, buffer_len - PK_LEN_SECP256K1, bech32_hrp, hashed2_pk, CX_RIPEMD160_SIZE, 1))
 
     *addrResponseLen = PK_LEN_SECP256K1 + strlen(addr);
 
