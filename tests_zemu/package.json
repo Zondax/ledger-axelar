@@ -18,8 +18,8 @@
     "testSR25519": "jest --detectOpenHandles --runInBand tests/sr25519.test.ts"
   },
   "dependencies": {
-    "@zondax/ledger-axelar": "^0.0.1",
-    "@zondax/zemu": "^0.32.0"
+    "@zondax/ledger-axelar": "^0.2.0",
+    "@zondax/zemu": "^0.33.1"
   },
   "devDependencies": {
     "@types/jest": "^27.4.0",

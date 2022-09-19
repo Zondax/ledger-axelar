@@ -13,10 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  ******************************************************************************* */
-export const CLA = 0x55;
+export const CLA = 0x55
 export const INS = {
   GET_VERSION: 0x00,
   GET_ADDR_SECP256K1: 0x04,
   SIGN_SECP256K1: 0x02,
-};
-export const PKLEN = 33;
+}
+export const PKLEN = 33
