@@ -90,7 +90,7 @@ __Z_INLINE parser_error_t calculate_is_default_chainid() {
 
     // get chain_id
     char outKey[2];
-    char outVal[20];
+    char outVal[25];
     uint8_t pageCount;
     INIT_QUERY_CONTEXT(outKey, sizeof(outKey),
                        outVal, sizeof(outVal),
@@ -111,10 +111,14 @@ __Z_INLINE parser_error_t calculate_is_default_chainid() {
     zemu_log_stack(outVal);
     zemu_log_stack(COIN_DEFAULT_CHAINID);
 
-    if (strcmp(outVal, COIN_DEFAULT_CHAINID) == 0) {
+    if (strncmp(outVal, COIN_DEFAULT_CHAINID, sizeof(COIN_DEFAULT_CHAINID) -1) == 0) {
         // If we don't match the default chainid, switch to expert mode
         display_cache.is_default_chain = true;
         zemu_log_stack("DEFAULT Chain ");
+    } else if (strncmp(outVal, COIN_DEFAULT_TESTNETID, sizeof(COIN_DEFAULT_TESTNETID) -1) == 0) {
+        // If we don't match the testnet chainid, switch to expert mode
+        display_cache.is_default_chain = true;
+        zemu_log_stack("TESTNET Chain ");
     } else {
         zemu_log_stack("Chain is NOT DEFAULT");
     }
