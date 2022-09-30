@@ -43,6 +43,7 @@ typedef enum {
 #define APPVERSION_LINE2                   ("v" APPVERSION)
 
 #define COIN_DEFAULT_CHAINID                "axelar-dojo-1"
+#define COIN_DEFAULT_TESTNETID              "axelar-testnet-lisbon-3"
 
 #define COIN_DEFAULT_DENOM_BASE             "uaxl"
 #define COIN_DEFAULT_DENOM_REPR             "AXL"
