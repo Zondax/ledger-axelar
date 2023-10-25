@@ -34,7 +34,7 @@
     "bip32": "^3.0.1",
     "bip39": "^3.0.4",
     "core-js": "^3.25.1",
-    "crypto-js": "4.1.1",
+    "crypto-js": "4.2.0",
     "eslint": "^8.23.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
